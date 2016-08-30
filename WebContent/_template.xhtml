@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"	
+		xmlns:p="http://primefaces.org/ui">
+	<h:head>
+	
+	
+	</h:head>
+	<h:body>
+		<div id="cabecalho" style="size:1px;">
+			<h:graphicImage  library="img" name="backoffice_name.png" width="250px;"/>
+			<h:graphicImage  library="img" name="backoffice_img.png" width="100px;"/>
+			<h:form>
+			
+			<p:menubar>
+				<p:submenu label="Cadastro">
+					<p:menuitem value="Funcionario" action="funcionario"/>
+					<p:menuitem value="Gerente" action="gerente"/>
+					<p:menuitem value="Setor" action="setor"/>
+					<p:menuitem value="Fornecedor" action="fornecedor"/>
+				</p:submenu>
+				<p:submenu label="Pedidos">
+					<p:menuitem value="Compra" action="teste"/>
+					<p:menuitem value="Cotação" action="cotacao"/>
+					<p:menuitem value="Reembolso"/>
+				</p:submenu>
+				<p:submenu label="Relatórios">
+					<p:menuitem value="Compra"/>
+					<p:menuitem value="Cotação"/>
+					<p:menuitem value="Reembolso"/>
+				</p:submenu>
+			<f:facet name="options">
+				 <p:commandButton type="button"  action="#{loginBean.sair}" value="Logout" icon="ui-icon-extlink" />
+			</f:facet>
+			
+			</p:menubar>
+			</h:form>
+			<h1> <ui:insert name="titulo"></ui:insert>  </h1>
+		</div>
+		
+		<div id="conteudo">
+			<ui:insert name="conteudo"></ui:insert>
+		</div>
+	 </h:body>
+</html>

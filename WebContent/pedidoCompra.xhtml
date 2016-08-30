@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="titulo">
+			Pedido de Compra
+		</ui:define>
+	<ui:define name="conteudo">
+		<h:form>
+			<p:growl id="growl" showDetail="true" sticky="true" />
+			<h1>Compra</h1>
+			<fieldset>
+				<legend>Dados da Compra</legend>
+				<h:panelGrid columns="2">
+					<h:outputText value="Descrição" for="descricao" />
+					<h:inputText id="descricao" value="#{compraBean.compra.descricao}" />
+					<h:outputText value="Quantidade" for="quantidade" />
+					<h:inputText id="quantidade" required="true"
+						requiredMessage="Quantidade Obrigatoria"
+						value="#{compraBean.compra.quantidade}">
+						<f:ajax event="blur" render="growl" />
+					</h:inputText>
+					<h:outputText value="Data Solicitação" for="dataSolicitacao" />
+					<h:inputText id="dataSolicitacao"
+						value="#{compraBean.compra.dataSolicitacao.time}">
+						<f:convertDateTime pattern="dd/MM/yyyy"
+							timeZone="America/Sao_Paulo" />
+					</h:inputText>
+					<h:outputLabel value="Selecionar o Setor: " for="setor" />
+					<p:selectOneMenu value="#{compraBean.setorId}">
+						<p:ajax listener="#{compraBean.onSetorChange}"
+							update="funcionario" />
+						<f:selectItem itemValue="  -- Selecionar Setor -- " />
+						<f:selectItems value="#{compraBean.setores}" var="setor"
+							itemLabel="#{setor.descricao}" itemValue="#{setor.id}" />
+					</p:selectOneMenu>
+					<p:outputLabel value="Funcionarios" for="funcionario"  />
+					<p:selectOneMenu id="funcionario"
+						value="#{compraBean.funId}">
+						<f:selectItems value="#{compraBean.funcionarios}" var="funcionario"
+							itemLabel="#{funcionario.id}" itemValue="#{funcionario.id}"/>
+					</p:selectOneMenu>
+				</h:panelGrid>
+			</fieldset>
+			<h:commandButton value="Gravar" action="#{compraBean.gravar}">
+				<f:ajax render="@form" resetValues="true"  />
+			</h:commandButton>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>

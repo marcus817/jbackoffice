@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="_template.xhtml">
+	<ui:define name="titulo">
+			Cotação
+	</ui:define>
+	<ui:define name="conteudo">
+		<p:ajaxStatus>
+			<f:facet name="start">
+				<h:graphicImage library="img" name="load_icon.gif" width="50px;" />
+			</f:facet>
+			<f:facet name="complete">
+				<h:outputText  value="" />
+			</f:facet>
+		</p:ajaxStatus>
+		<p:messages autoUpdate="true"/>
+		<h:form >
+			<p:fieldset> Cotação </p:fieldset>
+			<p:panelGrid columns="3">
+			
+			<p:outputLabel value="Informe o Pedido de Compra:  " for="codcompra"/>
+			<p:inputText id="codcompra" value="#{cotacaoBean.idCompra}">
+				<p:ajax listener="#{cotacaoBean.find}" event="change" process=""/>
+			</p:inputText>
+			<p:commandButton value="Buscar Compra" action="#{cotacaoBean.find}"  />
+			</p:panelGrid>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

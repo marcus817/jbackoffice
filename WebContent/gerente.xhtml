@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	 xmlns:h="http://java.sun.com/jsf/html"
+	 xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="titulo">
+			Cadastro de Gerente
+		</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form>
+			<h1>Gerente</h1>
+			<h:messages />
+			<fieldset>
+				<legend>Dados do Gerente</legend>
+				<h:panelGrid columns="2">
+					<h:outputText value="Nome" for="nome" />
+					<h:inputText id="nome" value="#{gerenteBean.gerente.nome}" />
+					<h:outputText value="Email" for="email" />
+					<h:inputText id="email" value="#{gerenteBean.gerente.email}" />
+					<h:outputText value="Lotacao" for="lotacao" />
+					<h:inputText id="lotacao" value="#{gerenteBean.gerente.locacao}" />
+				</h:panelGrid>
+			</fieldset>
+
+			<fieldset>
+				<legend>Dados do Setor</legend>
+				<h:outputLabel value="Selecionar um Setor para o Gerente "
+					for="setor" />
+				<h:selectOneMenu value="#{gerenteBean.setorId}">
+					<f:selectItem itemValue="  -- Selecionar Setor -- " />
+					<f:selectItems value="#{gerenteBean.setores}" var="setor"
+						itemLabel="#{setor.descricao}" itemValue="#{setor.id}" />
+				</h:selectOneMenu>
+			</fieldset>
+			<h:commandButton value="Gravar" action="#{gerenteBean.gravar}" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

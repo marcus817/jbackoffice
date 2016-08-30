@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="titulo">
+			Pedido de Compra
+		</ui:define>
+	<ui:define name="conteudo">	
+	<h:form>
+		<fieldset>Dados de Teste</fieldset>
+		<h:panelGrid columns="2">
+			<h:outputText value="Digite a Descrição" for="descricao" />
+			<h:inputText id="descricao" value="#{compraBean.compra.descricao}" />
+			<h:outputText value="Digite a Quantidade: " for="quantidade" />
+			<h:inputText id="quantidade" value="#{compraBean.compra.quantidade}" />
+			<h:outputText value="Informe a Data: " for="dataSolicitacao" />
+			<h:inputText id="dataSolicitacao"
+				value="#{compraBean.compra.dataSolicitacao.time}">
+				<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
+			</h:inputText>
+			<h:outputLabel value="Setor: " for="setor" />
+			<p:selectOneMenu value="#{compraBean.setorId}">
+				<p:ajax listener="#{compraBean.onSetorChange}" update="funcionario"/>
+				<f:selectItem itemLabel="Defina um Setor" />
+				<f:selectItems value="#{compraBean.setores}" var="setor"
+					itemLabel="#{setor.descricao}" itemValue="#{setor.id}" />
+			</p:selectOneMenu>
+			<p:outputLabel value="Funcionario: " for="funcionario" />
+			<p:selectOneMenu id="funcionario" value="#{compraBean.funId}">
+				<f:selectItems value="#{compraBean.funcionarios}" var="funcionario"
+					itemLabel="#{funcionario.nome}" itemValue="#{funcionario.id}" />
+			</p:selectOneMenu>
+
+		</h:panelGrid>
+		<h:commandButton value="Gravar" action="#{compraBean.gravar}" />	
+	</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<fieldset>
+		<h:form>	
+		<legend>Pesquisar Funcionario do Setor</legend>
+				<h:outputLabel value="Selecionar o Setor: " for="setorb"/>
+				<h:selectOneMenu value="#{funcionarioBean.setorIdBusca}" id="setor">
+				<f:selectItem itemValue="  -- Selecionar Setor -- " />
+				<f:selectItems value="#{funcionarioBean.setores}"  var="setorb"  
+				itemLabel="#{setorb.descricao}" itemValue="#{setorb.id}"/>
+				</h:selectOneMenu>
+		<h:commandButton value="Busca" action="#{funcionarioBean.gravarSetor}" />
+	
+		</h:form>	
+		
+	</fieldset>
+	
+		<fieldset>
+			<h:dataTable value="#{funcionarioBean.funsetor}" var="funcionario" id="tabelaFuncionarios">
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{funcionario.nome}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Cargo</f:facet>
+					<h:outputText value="#{funcionario.cargo}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Setor</f:facet>
+					<h:outputText value="#{funcionario.setor.descricao}"/>
+				</h:column>
+			</h:dataTable> 
+		</fieldset>	
+</html>

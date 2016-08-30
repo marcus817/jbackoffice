@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core">
+<h:body>
+<h:form>
+		<h1>NOVO FORNECEDOR</h1>
+		<fieldset>
+			<legend>Dados dos Fornecedor</legend>
+			<h:panelGrid columns="2">
+				<h:outputText value="Nome" for="nome"/>
+				<h:inputText id="nome" required="true" requiredMessage="Nome Obrigatorio"
+				 validatorMessage="Nome Incompleto">
+					<f:ajax event="blur" render="messages"/>
+					<f:validateLength minimum="5"/>
+				</h:inputText>
+				<h:outputText value="CNPJ" for="cnpj"/>
+				<h:inputText id="cnpj" />
+				<h:outputText value="Email" for="email"/>
+				<h:inputText id="email" />
+				<h:outputText value="Logradouro" for="logradouro"/>
+				<h:inputText id="logradouro" />
+				<h:outputText value="Cidade" for="cidade"/>
+				<h:inputText id="cidade" />
+				<h:outputText value="Numero" for="numero"/>
+				<h:inputText id="numero" />
+				<h:outputText value="Telefone" for="telefone"/>
+				<h:inputText id="telefone" />
+				<h:outputText value="Data de Fundação"/>
+				<h:inputText id="dataAdmissao" >
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+				</h:inputText>
+			</h:panelGrid>
+		</fieldset>
+	
+	
+	
+		<h:commandButton value="Gravar" >
+			<f:ajax execute ="@form" render="@form :tabelaFuncionarios"/>
+		</h:commandButton>
+	</h:form>
+	
+</h:body>
+</html>

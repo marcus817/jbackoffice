@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="titulo">
+			Cadastro de Funcionario
+		</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form>
+			<h:messages id="messages" />
+			<fieldset>
+				<legend>Dados dos Funcionario</legend>
+				<h:panelGrid columns="2">
+					<h:outputText value="Nome" for="nome" />
+					<h:inputText id="nome" value="#{funcionarioBean.funcionario.nome}"
+						required="true" requiredMessage="Nome Obrigatorio"
+						validatorMessage="Nome Incompleto">
+						<f:ajax event="blur" render="messages" />
+						<f:validateLength minimum="5" />
+					</h:inputText>
+					<h:outputText value="Cargo" for="cargo" />
+					<h:inputText id="cargo"
+						value="#{funcionarioBean.funcionario.cargo}" />
+					<h:outputText value="Email" for="email" />
+					<h:inputText id="email"
+						value="#{funcionarioBean.funcionario.email}" />
+					<h:outputText value="Senha" for="senha" />
+					<h:inputSecret id="senha"
+						value="#{funcionarioBean.funcionario.senha}" />
+					<h:outputText value="Data de Admissão" for="dataAdmissao" />
+					<h:inputText id="dataAdmissao"
+						value="#{funcionarioBean.funcionario.dataAdmissao.time}">
+						<f:convertDateTime pattern="dd/MM/yyyy"
+							timeZone="America/Sao_Paulo" />
+					</h:inputText>
+				</h:panelGrid>
+			</fieldset>
+
+			<fieldset>
+				<legend>Dados do Setor</legend>
+				<h:outputLabel value="Selecionar o Setor: " for="setor" />
+				<h:selectOneMenu value="#{funcionarioBean.setorId}">
+					<f:selectItem itemValue="  -- Selecionar Setor -- " />
+					<f:selectItems value="#{funcionarioBean.setores}" var="setor"
+						itemLabel="#{setor.descricao}" itemValue="#{setor.id}" />
+				</h:selectOneMenu>
+			</fieldset>
+			<h:commandButton value="Gravar" action="#{funcionarioBean.gravar}">
+				<f:ajax execute="@form" render="@form :tabelaFuncionarios" />
+			</h:commandButton>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>
